@@ -26,6 +26,8 @@ Usage: rakudax <control> [Options]
  --verify <path>         path to verify files (default: dist/verify)
  --threads <num>         threads num in generate (deafult: 1)
  --yaml                  change output type to yaml (default: json)
+ --debug                 print debugging information to console
+ --logging               enable ActiveRecord's logging. (output: active_record.log)
 
  *only support yaml setting file
 ===========================================================================
