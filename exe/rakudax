@@ -1,0 +1,13 @@
+#!/usr/bin/env ruby
+
+require "bundler/setup"
+require 'rakudax'
+
+if ARGV.first == "new"
+  require 'rakudax/skel'
+  Rakudax::Skel.create ARGV.second
+  exit 0
+end
+
+Rakudax::Base.parse_options ARGV
+Rakudax::Base.execute

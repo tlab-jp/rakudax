@@ -1,0 +1,14 @@
+/.bundle/
+/.yardoc
+/Gemfile.lock
+/_yardoc/
+/coverage/
+/doc/
+/pkg/
+/spec/reports/
+/spec/tmp/
+/spec/files/db/before.sqlite3
+/spec/files/db/after.sqlite3
+/tmp/
+/*.log
+/vendor/

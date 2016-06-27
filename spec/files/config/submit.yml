@@ -1,0 +1,13 @@
+default: &default
+  force_reset: true # truncate all data
+  models: []
+
+production:
+  <<: *default
+
+test:
+  <<: *default
+  models:
+    -
+      name: Test
+      db: test_after_database

@@ -1,0 +1,29 @@
+default: &default
+  force_reset: true # truncate all data
+  models: []
+
+production:
+  <<: *default
+
+test:
+  <<: *default
+  models:
+    -
+      name: Test
+      auto_matching: true
+      after:
+        db: test_after_database
+        table: tests
+        modules:
+          - TestAttributes
+      before:
+        auto_numbering: true
+        db: test_before_database
+        id: test_id
+        table: test
+        modules:
+          - TestBeforeAttributes
+      attributes:
+        id: id
+        test_before: test_after
+        test_full_name: test_full_name

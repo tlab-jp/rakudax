@@ -1,0 +1,3 @@
+module TestAfterAttributes
+
+end

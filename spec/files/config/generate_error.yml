@@ -1,0 +1,9 @@
+default: &default
+  limit: 0
+  models: []
+
+production:
+  <<: *default
+
+test:
+  limit: 0

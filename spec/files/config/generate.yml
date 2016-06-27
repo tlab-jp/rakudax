@@ -1,0 +1,27 @@
+default: &default
+  limit: 0
+  models: []
+
+production:
+  <<: *default
+
+test:
+  <<: *default
+  models:
+    -
+      name: Test
+      db: test_before_database
+      id: test_id
+      table: test
+      auto_numbering: true
+      aliases:
+        test_before: test_after
+      modules:
+        - TestAttributes
+      attributes:
+        - id
+        - test
+        - test_after
+        - test_full_name
+      required:
+        - id

@@ -1,0 +1,11 @@
+test_before_database:
+  adapter: sqlite3
+  pool: 5
+  database: spec/files/db/before.sqlite3
+  timeout: 5000
+
+test_after_database:
+  adapter: sqlite3
+  pool: 5
+  database: spec/files/db/after.sqlite3
+  timeout: 5000
