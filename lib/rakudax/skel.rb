@@ -3,6 +3,24 @@ module Rakudax
     require 'pathname'
     require 'fileutils'
 
+    DATABASE_YAML=<<-EOS
+#sample_before:
+#  adapter: mysql2
+#  encoding: utf8
+#  reconnect: true
+#  database: sample_mysql
+#  pool: 1
+#  username: sample
+#  password: sample
+#  host: localhost
+
+#sample_after:
+#  adapter: sqlite3
+#  pool: 1
+#  database: db/sample_sqlite.sqlite3
+#  timeout: 5000
+EOS
+
     GENERATE_YAML=<<-EOS
 default: &default
   limit: 0
@@ -68,6 +86,7 @@ end
     def self.create(name=nil)
       @@name = name
       self.create_dir("config")
+      self.create_file("config/database.yml", DATABASE_YAML)
       self.create_file("config/generate.yml", GENERATE_YAML)
       self.create_file("config/migrate.yml",  MIGRATE_YAML)
       self.create_file("config/submit.yml", SUBMIT_YAML)
