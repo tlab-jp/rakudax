@@ -8,7 +8,7 @@ cache:
     - vendor/bundle
 install: bundle install --path=vendor/bundle
 script:
-    - bundle exec rake rspec
+    - bundle exec rake spec
 addons:
   code_climate:
     repo_token: bb43f5a81bbc75fc12b8d510d664dbd90b73cdbb22adb4a0aaf7e064117687dd
