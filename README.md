@@ -1,8 +1,11 @@
 # Rakudax
 
-[![Build Status](https://travis-ci.org/tlab-jp/rakudax.svg?branch=master)](https://travis-ci.org/tlab-jp/rakudax)
-[![Code Climate](https://codeclimate.com/github/tlab-jp/rakudax/badges/gpa.svg)](https://codeclimate.com/github/tlab-jp/rakudax)
-[![Test Coverage](https://codeclimate.com/github/tlab-jp/rakudax/badges/coverage.svg)](https://codeclimate.com/github/tlab-jp/rakudax/coverage)
+[![Build Status](https://travis-ci.org/tlab-jp/rakudax.svg?branch=master)](https://travis-ci.org/tlab-jp/rakudax)  
+[![Code Climate](https://codeclimate.com/github/tlab-jp/rakudax/badges/gpa.svg)](https://codeclimate.com/github/tlab-jp/rakudax)  
+[![Test Coverage](https://codeclimate.com/github/tlab-jp/rakudax/badges/coverage.svg)](https://codeclimate.com/github/tlab-jp/rakudax/coverage)  
+
+Data migration tool using (ruby)Active Record.   
+For more information about [tlab-jp/rakuda](https://github.com/tlab-jp/rakuda).
 
 ## Installation
 
@@ -10,6 +13,19 @@ Add this line to your application's Gemfile:
 
 ```ruby
 gem 'rakudax'
+
+## If using sqlite database, then comment-in this line.
+#gem 'sqlite3'
+
+## If using mysql database, then comment-in this line.
+#gem 'mysql2'
+
+## If using postgresql database, then comment-in this line.
+#gem 'pg'
+
+## If using ms sqlserver datavase, then comment-in this line.
+#gem 'tiny_tds'
+#gem 'activerecord-sqlserver-adapter'
 ```
 
 And then execute:
@@ -22,13 +38,35 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```
+===========================================================================
+<>: required
+[]: optional
 
-## Development
+## new rakuda project creation
+Usage: rakudax new [name]
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+ name: project name
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+## rakuda project execution
+Usage: rakudax <control> [Options]
+
+ control: generate, submit, migrate, verify
+
+ Options:
+ 
+ --setting <path>        *path to control setting file (default: config/<control>.yml)
+ --database <path>       *path to database setting file (default: config/database.yml)
+ --modules <path>        path to modules directory
+ --env <enviroment>      control-setting enviroment (default: development)
+ --intermediate <path>   path to intermediate files (default: dist/intermediate_files)
+ --verify <path>         path to verify files (default: dist/verify)
+ --threads <num>         threads num in generate (deafult: 1)
+ --yaml                  change output type to yaml (default: json)
+
+ *only support yaml setting file
+===========================================================================
+```
 
 ## Contributing
 
