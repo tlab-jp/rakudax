@@ -3,6 +3,7 @@
 [![Build Status](https://travis-ci.org/tlab-jp/rakudax.svg?branch=master)](https://travis-ci.org/tlab-jp/rakudax)  
 [![Code Climate](https://codeclimate.com/github/tlab-jp/rakudax/badges/gpa.svg)](https://codeclimate.com/github/tlab-jp/rakudax)  
 [![Test Coverage](https://codeclimate.com/github/tlab-jp/rakudax/badges/coverage.svg)](https://codeclimate.com/github/tlab-jp/rakudax/coverage)  
+[![Gem Version](https://badge.fury.io/rb/rakudax.svg)](https://badge.fury.io/rb/rakudax)  
 
 Data migration tool using (ruby)Active Record.   
 For more information about [tlab-jp/rakuda](https://github.com/tlab-jp/rakuda).
