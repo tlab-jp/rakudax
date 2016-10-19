@@ -13,8 +13,8 @@ module Rakudax
         include GeneralAttributes
       rescue
       end
-        #{"attr_accessor :id" if !model.id.nil? && model.auto_numbering}
         "
+        gen_code += "attr_accessor :id" if !model.id.nil? && model.auto_numbering
         (model.associations || []).each do |asc| 
           next unless asc.method
           next unless asc.scope
@@ -31,14 +31,19 @@ module Rakudax
 
         (model.modules || []).each do |mdl| 
           gen_code += "include #{mdl}
-    end
           "
         end
+        gen_code += "
+    end"
 
         puts gen_code if Rakudax::Base.debug
         eval gen_code
         const_get(classname_before).establish_connection Rakudax::Base.dbconfig[model.db]
-        const_get(classname_before).table_name = model.table unless model.table.nil?
+        unless model.table.nil?
+          const_get(classname_before).table_name = model.table
+        else
+          const_get(classname_before).table_name = classname.tableize
+        end
         const_get(classname_before).primary_key = model.id.to_sym unless model.id.nil?
         const_get(classname_before).inheritance_column = nil if model.inheritance
 
@@ -116,7 +121,8 @@ module Rakudax
         scope = const_get(classname_before).all
         data_count = scope.count
         print "Migrate #{const_get(classname).to_s}#{"s" if data_count > 1}(#{data_count}) ..."
-        scope.each do |data|
+        batch_size = Rakudax::Settings.batch_size || 1000
+        scope.find_each(batch_size: batch_size).each do |data|
           obj = const_get(classname).new
           if migration.auto_matching
             const_get(classname).attribute_names.each do |key|

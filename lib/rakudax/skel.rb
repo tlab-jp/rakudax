@@ -36,7 +36,14 @@ development:
     MIGRATE_YAML=<<-EOS
 default: &default
   force_reset: true # truncate all data
-  models: []
+  batch_size: 1000  # the size of the batch
+  models:
+    - name: Sample         # require
+      auto_matching: true
+      before:
+        db: sample_before  # require
+      after:
+        db: sample_after   # require
 
 production:
   <<: *default
