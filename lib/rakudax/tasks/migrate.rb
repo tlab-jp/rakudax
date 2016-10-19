@@ -14,7 +14,10 @@ module Rakudax
       rescue
       end
         "
-        gen_code += "attr_accessor :id" if !model.id.nil? && model.auto_numbering
+        if !model.id.nil? && model.auto_numbering
+          gen_code += "attr_accessor :id
+          "
+        end
         (model.associations || []).each do |asc| 
           next unless asc.method
           next unless asc.scope
@@ -118,28 +121,32 @@ module Rakudax
           end
         end
 
-        scope = const_get(classname_before).all
+        scope = const_get(classname_before).order(const_get(classname_before).primary_key)
         data_count = scope.count
         print "Migrate #{const_get(classname).to_s}#{"s" if data_count > 1}(#{data_count}) ..."
         batch_size = Rakudax::Settings.batch_size || 1000
-        scope.find_each(batch_size: batch_size).each do |data|
-          obj = const_get(classname).new
-          if migration.auto_matching
-            const_get(classname).attribute_names.each do |key|
-              puts key
-              obj.send("#{key}=", data.send(key)) if data.attribute_names.include?(key)
+        (1+data_count/batch_size).times do |i|
+          offset = (i * batch_size)
+          limit = data_count - i*batch_size
+          limit = batch_size if limit > batch_size
+          next if limit == 0
+          scope.offset(offset).limit(limit).each do |data|
+            obj = const_get(classname).new
+            if migration.auto_matching
+              const_get(classname).attribute_names.each do |key|
+                obj.send("#{key}=", data.send(key)) if data.attribute_names.include?(key)
+              end
             end
-          end
-          puts migration.attributes
-          (migration.attributes || {}).each do |key1, key2|
-            obj.send("#{key2}=", data.send(key1))
-          end
-          begin
-            unless obj.save
-              STDERR.puts "Fatal Error: New #{classname} cant create. #{obj.errors.full_messages}"
+            (migration.attributes || {}).each do |key1, key2|
+              obj.send("#{key2}=", data.send(key1))
             end
-          rescue => ex
-            STDERR.puts "Fatal Error: New #{classname} cant create. #{hash} (#{ex.message})"
+            begin
+              unless obj.save
+                STDERR.puts "Fatal Error: New #{classname} cant create. #{obj.errors.full_messages}"
+              end
+            rescue => ex
+              STDERR.puts "Fatal Error: New #{classname} cant create. #{hash} (#{ex.message})"
+            end
           end
         end
 
