@@ -12,4 +12,4 @@ install: bundle install --path=vendor/bundle
 script:
   - bundle exec rake spec
 after_success:
-  - bundle exec codeclimate-test-reporter
+  - CODECLIMATE_REPO_TOKEN=bb43f5a81bbc75fc12b8d510d664dbd90b73cdbb22adb4a0aaf7e064117687dd bundle exec codeclimate-test-reporter
