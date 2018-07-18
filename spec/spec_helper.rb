@@ -1,8 +1,10 @@
 require 'simplecov'
 
-SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
-  SimpleCov::Formatter::HTMLFormatter,
-])
+if ENV['CODECOV_TOKEN']
+  require 'codecov'
+  SimpleCov.formatter =  SimpleCov::Formatter::Codecov
+end
+
 SimpleCov.start do
   add_filter "/vendor/"
   add_filter "/spec/"

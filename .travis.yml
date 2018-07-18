@@ -4,6 +4,10 @@ rvm:
   - 2.3.7
   - 2.4.4
   - 2.5.1
+env:
+  global:
+    secure: "l1layR4PFVASbOSWTuvAhdtvkCNKIWCFnlsX/PnigO2FrpnorSswSn9gjCdFU9buzpHAoTmRiuMfXquJm2AhzhO0Zdvq/HZggHs66JBMPPGuvFAu13q3VjTh7VAwo1ulQWO1vshVZWEf9zY7MLFPXPPnJW1Cj7D+8iuJg//fiUSa+yBs/+/ohwQzwYyKN5fvIgNapMaby8FgSmrS7sRqSi7+Iss06BXqIIksKIuEODHfBDbb904TRPoyT8GyvQxcje507+xM3VFj2Q6An64jA4lOcqsA7oRD8xRbcNZyAbI6ZN0Cifc4yfcI2bjghmDne9D2wDfmSnrCL6X9AhdwAeaC9FFZ6dmVXWw4P+2WjgMzzczKjgJqvFSakKGxo+Bp9uwJTrbaZwxNLHhIJR0nH59uLLddK0DPKMfhkoT8U/6d2hNtRd4UCsxVoGCl/zJoM0RalQZwjgn5r/GLmyAy+dM5a7YrJGpT90J2/AWqpA3b1Z9I9B4dEZrc5jTx/1QmhtHJo4+tItXLo5H6aFY1iEgRVomHKYwi/pVWKdDCEQhSfgNC4hX8c+BwsBhE6deciZOQGZwK/Ht/xgZiTH34JKnUEJ8+xy5MiM1yI0k4hEA4jTLui6z/G5wC3YyS0jGe4Q2Pc9wQdW/z4vRuQ9MaWUXaFkpXRzvQAI6qQOlUdog="
+    secure: "ox6jPGQfTnl3KjdcZi3PGOCP8u2tv8y+V71D+cEV04j5tiWiW7naNBxhbF5KVGfM2L4UaxeWcuC9i7gv3tjle+6RO5jW6a/b0bzxbW8OWsV/SYDDt7380Sm8Ejb6e+DoWhWsQp+a4FU+FaBvr1WTEE58tEOFUjhWS4ND4g2YgODQTJmj0/Qfya5J3YrQiNcLNBrhPxeXPbJ7nLrZGS65iDINTYKBi+XRImDlqUmFLDQcNfTJfEgytxRAehpH8mfqiy1L5eahWtPYkwq4xaSLSzPiwwOEvUpoTjdQo1/8BAes2NREKFeSTT+eHnkUcfVFI9OdZ+jPzdR+bXAh2Mw7cHIeFfhvTl0oSnR1FSx7OQqwzDlEGAstzMNR4NnGF+pPbDdBpgaq/SfY3syRrcoGxLUTt4Dt6LE/R0+XWAoS5CFrCjKfEs0ctJsAiFXkmMO03OggifdtmZYT8MEtTkBsFRyw4WmQA3ckGqDytHmnlb3f1dibEZsDswumqALeOaYYT+wHhP6WSqVoS5fnXmwYti4kKNgC3uttaSHmR9GcALpC45xC5mTGuLHBKHol74JAKDfI9G8Y7gEuAquKFkgrHcksjz5II8G3htqG0NH5Y8ULGiyxtBEGJH1IBnTVCJ1BCW2A5h+Yl4xVKL3vANILCMM+FLfHBaKmDCn80RQ50p8="
 before_install: gem install bundler
 cache:
   directories:
@@ -12,4 +16,4 @@ install: bundle install --path=vendor/bundle
 script:
   - bundle exec rake spec
 after_success:
-  - CODECLIMATE_REPO_TOKEN=bb43f5a81bbc75fc12b8d510d664dbd90b73cdbb22adb4a0aaf7e064117687dd bundle exec codeclimate-test-reporter
+  - bundle exec codeclimate-test-reporter
